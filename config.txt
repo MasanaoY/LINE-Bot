@@ -1,0 +1,10 @@
+# 余分な空白(スペース)は入れない
+
+# チャンネルアクセストークン
+CHANNEL_ACCESS_TOKEN=
+
+# LINEのユーザーID
+USER_ID_TO_SEND=
+
+# ngrokで取得したホスト名
+NGROK_URL_BASE=
