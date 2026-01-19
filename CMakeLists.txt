@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(picam)
+project(Picam)
 
 # C++の標準を設定 (C++17を使用)
 set(CMAKE_CXX_STANDARD 17)
@@ -16,7 +16,7 @@ find_package(OpenSSL REQUIRED)
 find_library(PIGPIO_LIBRARY NAMES pigpio REQUIRED)
 
 # httplibの設定
-include_directories(/home/pi/projects/line_bot)
+include_directories(/home/pi/projects/Pi4-SecurityCamera)
 
 # main.cppから実行ファイルを作成（名前は'main_app')
 add_executable(main_app main.cpp)
