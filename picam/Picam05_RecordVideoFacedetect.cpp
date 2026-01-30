@@ -8,8 +8,9 @@ int main() {
 
     // 1. 顔検出器の初期化
     CascadeClassifier face_detector;
-    string cascade_path = "haarcascade_frontalface_default.xml"; // ダウンロードしたXMLファイルのパスを指定。実行ファイルと同じディレクトリに置くか、絶対パスを指定してください。
-    
+    // 顔検出に使用するファイルのパスを記入
+    string cascade_path = "/usr/share/opencv4/haarcascades/haarcascade_frontalface_default.xml"; 
+
     if (!face_detector.load(cascade_path)) {
         cerr << "エラー: 顔カスケードファイルを読み込めませんでした: " << cascade_path << endl;
         cerr << "'haarcascade_frontalface_default.xml' が実行可能ファイルと同じディレクトリにあること、または絶対パスがパスが合っていることを確認してください。" << endl;
@@ -18,7 +19,8 @@ int main() {
     cout << "顔カスケードファイルが正常に読み込まれました。" << endl;
 
     // 2. VideoCaptureオブジェクトの初期化
-    VideoCapture cap(0); 
+    string pipeline = "libcamerasrc ! video/x-raw, width=640, height=480, framerate=30/1 ! videoconvert ! videoscale ! appsink";
+    VideoCapture cap(pipeline, CAP_GSTREAMER);    
 
     if (!cap.isOpened()) {
         cerr << "エラー: カメラを開けませんでした。" << endl;
