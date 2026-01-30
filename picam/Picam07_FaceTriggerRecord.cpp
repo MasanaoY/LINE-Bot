@@ -14,7 +14,7 @@ int main() {
     // 1. 初期設定と検出器のロード
     
     CascadeClassifier face_detector;
-    string cascade_path = "haarcascade_frontalface_default.xml"; 
+    string cascade_path = "/usr/share/opencv4/haarcascades/haarcascade_frontalface_default.xml"; 
     
     if (!face_detector.load(cascade_path)) {
         cerr << "エラー: 顔カスケードファイルを読み込めませんでした:" << cascade_path << endl;
@@ -23,7 +23,8 @@ int main() {
     }
     
     // 2. VideoCaptureオブジェクトの初期化 
-    VideoCapture cap(0); 
+    string pipeline = "libcamerasrc ! video/x-raw, width=800, height=600, framerate=15/1 ! videoconvert ! videoscale ! appsink";
+    VideoCapture cap(pipeline, CAP_GSTREAMER);
 
     if (!cap.isOpened()) {
         cerr << "エラー: カメラを開けませんでした。" << endl;
@@ -34,7 +35,7 @@ int main() {
     int frame_width = static_cast<int>(cap.get(CAP_PROP_FRAME_WIDTH));
     int frame_height = static_cast<int>(cap.get(CAP_PROP_FRAME_HEIGHT));
     Size frame_size(frame_width, frame_height);
-    double fps = 30.0; // 録画FPS
+    double fps = 15.0; // 録画FPS
     
     // 4. 状態管理変数
     bool is_recording = false;
