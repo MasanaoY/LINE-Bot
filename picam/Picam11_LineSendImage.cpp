@@ -16,7 +16,8 @@ void start_web_server(int port) {
     // --- 画像配信のエンドポイント ---
     // ngrokのURL + /image.jpg にアクセスが来たらこの処理が実行される
     svr.Get("/image.jpg", [](const httplib::Request& req, httplib::Response& res) {
-        std::string image_path = "/home/pi/image.jpg"; // ラズパイの画像パス
+        // 送信する画像パス
+        std::string image_path = "../image.jpg";
         cv::Mat img = cv::imread(image_path, cv::IMREAD_COLOR); // 画像をカラーとして読み込む
 
         // 画像がなければ404not foundを返す
